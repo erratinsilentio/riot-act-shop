@@ -27,7 +27,13 @@ export default async function HomePage() {
             className="object-cover grayscale opacity-25"
             priority
           />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #131313 0%, rgba(19,19,19,0.4) 50%, transparent 100%)" }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, #131313 0%, rgba(19,19,19,0.4) 50%, transparent 100%)",
+            }}
+          />
         </div>
 
         {/* Watermark */}
@@ -52,7 +58,10 @@ export default async function HomePage() {
         <div className="relative z-10 max-w-5xl">
           <h1
             className="font-black text-[4rem] md:text-[10rem] leading-[0.85] uppercase text-on-surface"
-            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.03em" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              letterSpacing: "-0.03em",
+            }}
           >
             RIOT
             <br />
@@ -85,13 +94,31 @@ export default async function HomePage() {
 
         {/* Vertical meta */}
         <div className="absolute right-12 bottom-12 hidden lg:flex flex-col items-end gap-2">
-          <span className="text-[10px] uppercase tracking-[0.3em] opacity-40" style={{ fontFamily: "var(--font-space-grotesk)", color: "var(--color-secondary)" }}>
+          <span
+            className="text-[10px] uppercase tracking-[0.3em] opacity-40"
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              color: "var(--color-secondary)",
+            }}
+          >
             FW_25_COLLECTION
           </span>
-          <span className="text-[10px] uppercase tracking-[0.3em] opacity-40" style={{ fontFamily: "var(--font-space-grotesk)", color: "var(--color-secondary)" }}>
+          <span
+            className="text-[10px] uppercase tracking-[0.3em] opacity-40"
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              color: "var(--color-secondary)",
+            }}
+          >
             52.2297° N, 21.0122° E
           </span>
-          <span className="text-[10px] uppercase tracking-[0.3em] opacity-40" style={{ fontFamily: "var(--font-space-grotesk)", color: "var(--color-secondary)" }}>
+          <span
+            className="text-[10px] uppercase tracking-[0.3em] opacity-40"
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              color: "var(--color-secondary)",
+            }}
+          >
             RIOT_ACT_ARCHIVE
           </span>
         </div>
@@ -99,22 +126,31 @@ export default async function HomePage() {
 
       {/* ── FEATURED PRODUCTS ── */}
       {featured.length > 0 && (
-        <section className="py-32 px-6 md:px-12" style={{ background: "var(--color-surface)" }}>
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        <section
+          className="py-32 px-6 md:px-12"
+          style={{ background: "var(--color-surface)" }}
+        >
+          <div className="flex items-baseline justify-between mb-12">
             <h2
-              className="font-black text-4xl md:text-6xl uppercase"
-              style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
+              className="text-base font-bold uppercase"
+              style={{
+                fontFamily: "var(--font-space-grotesk)",
+                letterSpacing: "0.15em",
+                color: "var(--color-on-surface-variant)",
+              }}
             >
-              WYBRANE{" "}
-              <span style={{ color: "var(--color-primary)" }}>MODELE</span>
+              Wybrane modele
             </h2>
-            <div className="h-px flex-grow mx-12 hidden md:block" style={{ background: "rgba(93,63,56,0.3)" }} />
             <Link
               href="/sklep"
-              className="text-sm uppercase tracking-widest transition-colors hover:text-primary"
-              style={{ fontFamily: "var(--font-space-grotesk)", color: "var(--color-secondary)" }}
+              className="text-xs uppercase tracking-widest transition-colors hover:text-primary"
+              style={{
+                fontFamily: "var(--font-space-grotesk)",
+                letterSpacing: "0.1em",
+                color: "var(--color-on-surface-variant)",
+              }}
             >
-              ZOBACZ WSZYSTKO
+              Zobacz wszystko →
             </Link>
           </div>
 
@@ -136,36 +172,49 @@ export default async function HomePage() {
         <div className="w-full md:w-1/2">
           <p
             className="text-sm uppercase mb-8"
-            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.4em", color: "var(--color-primary)" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              letterSpacing: "0.4em",
+              color: "var(--color-primary)",
+            }}
           >
             FILOZOFIA_MARKI
           </p>
           <h2
             className="font-black text-5xl md:text-7xl uppercase leading-tight mb-12"
-            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              letterSpacing: "-0.02em",
+            }}
           >
-            RÓŻNE MIEJSCA,<br />
-            ALE WSZYSTKIE<br />
-            <span className="italic opacity-50" style={{ color: "var(--color-secondary)" }}>ŁĄCZY TEN SAM BRÓD.</span>
+            RÓŻNE MIEJSCA,
+            <br />
+            ALE WSZYSTKIE
+            <br />
+            <span
+              className="italic opacity-50"
+              style={{ color: "var(--color-secondary)" }}
+            >
+              ŁĄCZY TEN SAM BRÓD.
+            </span>
           </h2>
         </div>
         <div className="w-full md:w-1/2 relative aspect-video md:aspect-square overflow-hidden grayscale">
-          {featured[0]?.images?.[0] ? (
-            <Image
-              src={featured[0].images[0]}
-              alt="Riot Act"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          ) : (
-            <div className="w-full h-full" style={{ background: "var(--color-surface-container)" }} />
-          )}
+          <Image
+            src={"/memo.jpeg"}
+            alt="Riot Act"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
         </div>
       </section>
 
       {/* ── NEWSLETTER ── */}
-      <section className="py-32 px-6 md:px-12" style={{ background: "var(--color-surface)" }}>
+      <section
+        className="py-32 px-6 md:px-12"
+        style={{ background: "var(--color-surface)" }}
+      >
         <div
           className="max-w-4xl mx-auto p-12 md:p-24 text-center"
           style={{
@@ -175,14 +224,21 @@ export default async function HomePage() {
         >
           <h2
             className="font-bold text-3xl md:text-5xl uppercase mb-6"
-            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              letterSpacing: "-0.02em",
+            }}
           >
             DOŁĄCZ DO{" "}
             <span style={{ color: "var(--color-primary)" }}>ARCHIWUM</span>
           </h2>
           <p
             className="text-sm uppercase mb-12"
-            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.2em", color: "var(--color-secondary)" }}
+            style={{
+              fontFamily: "var(--font-space-grotesk)",
+              letterSpacing: "0.2em",
+              color: "var(--color-secondary)",
+            }}
           >
             Otrzymuj informacje o limitowanych dropach i wydarzeniach.
           </p>
