@@ -19,14 +19,7 @@ export default function Nav() {
         RIOT ACT
       </Link>
 
-      <nav className="flex items-center gap-10">
-        <Link href="/" className="text-xs tracking-widest uppercase text-on-surface-variant hover:text-on-surface transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-          Home
-        </Link>
-        <Link href="/sklep" className="text-xs tracking-widest uppercase text-on-surface-variant hover:text-on-surface transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-          Produkty
-        </Link>
-      </nav>
+      <nav />
 
       <Link href="/koszyk" aria-label="Koszyk" className="relative">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-on-surface">
