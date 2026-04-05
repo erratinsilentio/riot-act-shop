@@ -14,7 +14,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Riot Act Shop",
+  title: "RIOT ACT",
   description: "Minimalistyczny sklep z ubraniami.",
 };
 

@@ -4,9 +4,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 const CATEGORIES: { label: string; value: string }[] = [
   { label: "Wszystkie", value: "" },
-  { label: "T-Shirty", value: "t-shirty" },
-  { label: "Bluzy", value: "bluzy" },
-  { label: "Spodnie", value: "spodnie" },
+  { label: "Ubrania", value: "ubrania" },
+  { label: "Muzyka", value: "muzyka" },
+  { label: "Dodatki", value: "dodatki" },
 ];
 
 export default function CategoryFilter() {

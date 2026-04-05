@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 export const dynamic = "force-dynamic";
 import Image from "next/image";
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import ProductDetail from "./ProductDetail";
 import { getProductBySlug } from "@/lib/products";
 
@@ -60,14 +61,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </main>
 
-      <footer className="px-16 py-8" style={{ background: "var(--color-surface-container-lowest)" }}>
-        <p
-          className="text-xs uppercase tracking-widest text-on-surface-variant"
-          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.1em" }}
-        >
-          MONOLITH
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }

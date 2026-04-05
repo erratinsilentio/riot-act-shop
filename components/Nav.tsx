@@ -16,7 +16,7 @@ export default function Nav() {
         className="text-sm font-bold tracking-widest uppercase text-on-surface"
         style={{ fontFamily: "var(--font-space-grotesk)" }}
       >
-        MONOLITH_STREET
+        RIOT ACT
       </Link>
 
       <nav className="flex items-center gap-10">

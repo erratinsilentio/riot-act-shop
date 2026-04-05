@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import CategoryFilter from "./CategoryFilter";
 import { getProducts } from "@/lib/products";
@@ -51,14 +52,7 @@ export default async function SklepPage({ searchParams }: Props) {
         )}
       </main>
 
-      <footer className="px-16 py-8 border-t border-surface-container-high">
-        <p
-          className="text-xs uppercase tracking-widest text-on-surface-variant"
-          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.1em" }}
-        >
-          MONOLITH
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }

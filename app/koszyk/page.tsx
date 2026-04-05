@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/lib/utils";
 
@@ -214,14 +215,7 @@ export default function KoszykPage() {
         )}
       </main>
 
-      <footer className="px-16 py-8" style={{ background: "var(--color-surface-container-lowest)" }}>
-        <p
-          className="text-xs uppercase tracking-widest text-on-surface-variant"
-          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.1em" }}
-        >
-          MONOLITH
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }
