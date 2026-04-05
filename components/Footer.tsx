@@ -12,38 +12,24 @@ export default function Footer() {
       }}
     >
       <div className="flex flex-col md:flex-row justify-between items-end w-full gap-8">
-        {/* Brand + address */}
+        {/* Brand */}
         <div>
           <p
-            className="text-lg font-bold mb-4"
+            className="text-lg font-bold"
             style={{ fontFamily: "var(--font-space-grotesk)", color: "var(--color-secondary)" }}
           >
             RIOT ACT
           </p>
-          <div
-            className="text-[10px] uppercase space-y-1"
+          <p
+            className="text-[10px] uppercase mt-1"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.2em", color: "var(--color-secondary)" }}
           >
-            <p>WORLDWIDE MOVEMENT</p>
-            <p>1312</p>
-          </div>
+            1312
+          </p>
         </div>
 
-        {/* Legal links */}
-        <div
-          className="flex gap-8 text-[10px] uppercase"
-          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.2em" }}
-        >
-          <Link href="#" className="transition-colors hover:text-primary" style={{ color: "var(--color-secondary)" }}>
-            Regulamin
-          </Link>
-          <Link href="#" className="transition-colors hover:text-primary" style={{ color: "var(--color-secondary)" }}>
-            Polityka prywatności
-          </Link>
-          <Link href="#" className="transition-colors hover:text-primary" style={{ color: "var(--color-secondary)" }}>
-            Kontakt
-          </Link>
-        </div>
+        {/* Center — empty */}
+        <div />
 
         {/* Social + copyright */}
         <div className="flex flex-col items-end gap-4">

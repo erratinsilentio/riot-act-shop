@@ -36,7 +36,7 @@ export default function Newsletter() {
         placeholder="TWOJE@EMAIL.COM"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="flex-grow text-sm py-4 px-0 outline-none uppercase transition-all"
+        className="flex-grow text-sm py-4 px-4 outline-none uppercase transition-all"
         style={{
           background: "var(--color-surface-container-lowest)",
           border: "none",
