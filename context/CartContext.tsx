@@ -3,6 +3,8 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import type { Size } from "@/types/database";
 
+const STORAGE_KEY = "riot-act-cart";
+
 export interface CartItem {
   productId: string;
   variantId: string;
@@ -21,13 +23,10 @@ type Action =
   | { type: "ADD"; item: CartItem }
   | { type: "REMOVE"; variantId: string }
   | { type: "UPDATE_QTY"; variantId: string; quantity: number }
-  | { type: "CLEAR" }
-  | { type: "HYDRATE"; items: CartItem[] };
+  | { type: "CLEAR" };
 
 function reducer(state: CartState, action: Action): CartState {
   switch (action.type) {
-    case "HYDRATE":
-      return { items: action.items };
     case "ADD": {
       const existing = state.items.find((i) => i.variantId === action.item.variantId);
       if (existing) {
@@ -70,18 +69,19 @@ interface CartContextValue {
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "riot-act-cart";
+
+function loadFromStorage(): CartState {
+  if (typeof window === "undefined") return { items: [] };
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? { items: JSON.parse(stored) } : { items: [] };
+  } catch {
+    return { items: [] };
+  }
+}
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, { items: [] });
-
-  // Hydrate from localStorage on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) dispatch({ type: "HYDRATE", items: JSON.parse(stored) });
-    } catch {}
-  }, []);
+  const [state, dispatch] = useReducer(reducer, undefined, loadFromStorage);
 
   // Persist on every change
   useEffect(() => {
