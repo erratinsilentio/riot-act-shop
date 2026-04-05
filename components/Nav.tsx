@@ -20,8 +20,8 @@ export default function Nav() {
       </Link>
 
       <nav className="flex items-center gap-10">
-        <Link href="/sklep" className="text-xs tracking-widest uppercase text-on-surface-variant hover:text-on-surface transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-          Sklep
+        <Link href="/" className="text-xs tracking-widest uppercase text-on-surface-variant hover:text-on-surface transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+          Home
         </Link>
         <Link href="/sklep" className="text-xs tracking-widest uppercase text-on-surface-variant hover:text-on-surface transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
           Produkty
