@@ -1,15 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import ProductCard from "@/components/ProductCard";
-import { getProducts } from "@/lib/products";
-
-export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const products = await getProducts();
-  const featured = products.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-surface">
@@ -65,33 +58,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* FEATURED PRODUCTS */}
-      {featured.length > 0 && (
-        <section className="px-16 py-24" style={{ background: "var(--color-surface)" }}>
-          <div className="flex items-baseline justify-between mb-12">
-            <h2
-              className="text-[2rem] font-bold uppercase leading-none text-on-surface"
-              style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
-            >
-              Wybrane modele
-            </h2>
-            <Link
-              href="/sklep"
-              className="text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors"
-              style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.1em" }}
-            >
-              Zobacz wszystkie →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featured.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* EDITORIAL */}
       <section
