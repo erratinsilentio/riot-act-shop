@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -8,6 +9,7 @@ import { useCart } from "@/context/CartContext";
 
 export default function PotwierdzonePage() {
   const { clearCart } = useCart();
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     clearCart();
@@ -19,7 +21,12 @@ export default function PotwierdzonePage() {
       <Nav />
 
       <main className="flex-1 flex flex-col justify-center px-16 pt-32 pb-24">
-        <div className="max-w-lg">
+        <motion.div
+          className="max-w-lg"
+          initial={{ opacity: 0, y: reduced ? 0 : 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduced ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           <p
             className="text-xs uppercase tracking-widest mb-6"
             style={{
@@ -56,7 +63,7 @@ export default function PotwierdzonePage() {
           >
             Wróć do sklepu
           </Link>
-        </div>
+        </motion.div>
       </main>
 
       <Footer />

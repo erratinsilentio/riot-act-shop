@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
@@ -13,6 +14,7 @@ const SHIPPING = 1500; // 15.00 PLN in grosze
 export default function KoszykPage() {
   const { items, subtotal, removeItem, updateQuantity } = useCart();
   const [loading, setLoading] = useState(false);
+  const reduced = useReducedMotion();
 
   const total = subtotal + (items.length > 0 ? SHIPPING : 0);
 
@@ -39,7 +41,12 @@ export default function KoszykPage() {
 
       <main className="pt-32 px-16 pb-24">
         {/* Header */}
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: reduced ? 0 : 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduced ? 0 : 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           <h1
             className="text-[3.5rem] font-bold uppercase leading-none text-on-surface"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
@@ -54,7 +61,7 @@ export default function KoszykPage() {
           >
             — SUMA ELEMENTÓW: {items.reduce((s, i) => s + i.quantity, 0)}
           </p>
-        </div>
+        </motion.div>
 
         {items.length === 0 ? (
           <div className="py-24 text-center">
@@ -71,11 +78,14 @@ export default function KoszykPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[7fr_4fr] gap-16">
             {/* Items */}
             <div className="flex flex-col gap-0">
-              {items.map((item) => (
-                <div
+              {items.map((item, i) => (
+                <motion.div
                   key={item.variantId}
                   className="flex gap-6 py-6"
                   style={{ borderBottom: "1px solid var(--color-surface-container-high)" }}
+                  initial={{ opacity: 0, y: reduced ? 0 : 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: reduced ? 0 : 0.5, delay: reduced ? 0 : 0.1 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
                 >
                   {/* Image */}
                   <div className="relative w-24 h-28 flex-shrink-0 bg-surface-container-low">
@@ -147,12 +157,18 @@ export default function KoszykPage() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* Summary */}
-            <div className="lg:sticky lg:top-32 h-fit" style={{ background: "var(--color-surface-container-low)", padding: "2rem" }}>
+            <motion.div
+              className="lg:sticky lg:top-32 h-fit"
+              style={{ background: "var(--color-surface-container-low)", padding: "2rem" }}
+              initial={{ opacity: 0, x: reduced ? 0 : 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: reduced ? 0 : 0.6, delay: reduced ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
               <h2
                 className="text-xs uppercase tracking-widest text-on-surface mb-8"
                 style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.1em" }}
@@ -210,7 +226,7 @@ export default function KoszykPage() {
               >
                 Kontynuuj zakupy
               </Link>
-            </div>
+            </motion.div>
           </div>
         )}
       </main>

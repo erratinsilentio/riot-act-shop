@@ -1,10 +1,22 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Kolekcja",
+  description: "Urban tactical gear — przeglądaj wszystkie modele. Limitowane kolekcje, minimalistyczny design.",
+  openGraph: {
+    title: "Kolekcja | RIOT ACT",
+    description: "Urban tactical gear — przeglądaj wszystkie modele. Limitowane kolekcje, minimalistyczny design.",
+  },
+};
+
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import ProductCard from "@/components/ProductCard";
 import CategoryFilter from "./CategoryFilter";
+import ProductGrid from "./ProductGrid";
+import FadeIn from "@/components/FadeIn";
 import { getProducts } from "@/lib/products";
 
 interface Props {
@@ -21,7 +33,7 @@ export default async function SklepPage({ searchParams }: Props) {
 
       <main className="pt-32 px-16 pb-24">
         {/* Header */}
-        <div className="mb-12">
+        <FadeIn className="mb-12">
           <h1
             className="text-[3.5rem] font-bold uppercase leading-none tracking-tight text-on-surface mb-3"
             style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
@@ -38,17 +50,13 @@ export default async function SklepPage({ searchParams }: Props) {
           <Suspense>
             <CategoryFilter />
           </Suspense>
-        </div>
+        </FadeIn>
 
         {/* Grid */}
         {products.length === 0 ? (
           <p className="text-on-surface-variant text-sm">Brak produktów.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          <ProductGrid products={products} />
         )}
       </main>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import type { Variant, Size } from "@/types/database";
 import { formatPrice } from "@/lib/utils";
@@ -20,6 +21,7 @@ export default function ProductDetail({ productId, name, description, price, var
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
+  const reduced = useReducedMotion();
 
   const stockFor = (size: Size) => variants.find((v) => v.size === size)?.stock ?? 0;
   const selectedVariant = variants.find((v) => v.size === selectedSize);
@@ -40,7 +42,12 @@ export default function ProductDetail({ productId, name, description, price, var
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <motion.div
+      className="flex flex-col gap-8"
+      initial={{ opacity: 0, x: reduced ? 0 : 24 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: reduced ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
       {/* Name + price */}
       <div>
         <h1
@@ -110,6 +117,6 @@ export default function ProductDetail({ productId, name, description, price, var
       >
         {added ? "Dodano do koszyka" : selectedSize ? "Dodaj do koszyka" : "Wybierz rozmiar"}
       </button>
-    </div>
+    </motion.div>
   );
 }
