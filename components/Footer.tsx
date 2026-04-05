@@ -22,7 +22,7 @@ export default function Footer() {
           </p>
           <p
             className="text-[10px] uppercase mt-1"
-            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.2em", color: "var(--color-secondary)" }}
+            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.2em", color: "var(--color-primary)" }}
           >
             1312
           </p>

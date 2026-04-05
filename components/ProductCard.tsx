@@ -9,7 +9,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/sklep/${product.slug}`} className="group block">
       {/* Image */}
-      <div className="relative w-full aspect-[3/4] bg-surface-container-low overflow-hidden">
+      <div className="relative w-full aspect-[4/3] bg-surface-container-low overflow-hidden">
         {image ? (
           <Image
             src={image}
