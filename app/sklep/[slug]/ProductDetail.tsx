@@ -1,22 +1,43 @@
 "use client";
 
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
 import type { Variant, Size } from "@/types/database";
 import { formatPrice } from "@/lib/utils";
 
 interface Props {
+  productId: string;
   name: string;
   description: string;
   price: number;
   variants: Variant[];
+  image?: string;
 }
 
 const SIZE_ORDER: Size[] = ["S", "M", "L", "XL"];
 
-export default function ProductDetail({ name, description, price, variants }: Props) {
+export default function ProductDetail({ productId, name, description, price, variants, image }: Props) {
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
+  const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
 
   const stockFor = (size: Size) => variants.find((v) => v.size === size)?.stock ?? 0;
+  const selectedVariant = variants.find((v) => v.size === selectedSize);
+
+  function handleAdd() {
+    if (!selectedVariant) return;
+    addItem({
+      productId,
+      variantId: selectedVariant.id,
+      name,
+      size: selectedSize!,
+      price,
+      quantity: 1,
+      image,
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  }
 
   return (
     <div className="flex flex-col gap-8">
@@ -28,10 +49,7 @@ export default function ProductDetail({ name, description, price, variants }: Pr
         >
           {name}
         </h1>
-        <p
-          className="text-2xl font-bold text-on-surface"
-          style={{ fontFamily: "var(--font-space-grotesk)" }}
-        >
+        <p className="text-2xl font-bold text-on-surface" style={{ fontFamily: "var(--font-space-grotesk)" }}>
           {formatPrice(price)}
         </p>
       </div>
@@ -73,17 +91,24 @@ export default function ProductDetail({ name, description, price, variants }: Pr
       {/* CTA */}
       <button
         disabled={!selectedSize}
-        className="w-full py-4 text-sm font-bold uppercase tracking-widest transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+        onClick={handleAdd}
+        className="w-full py-4 text-sm font-bold uppercase tracking-widest transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         style={{
           fontFamily: "var(--font-space-grotesk)",
           letterSpacing: "0.1em",
-          background: selectedSize
+          background: added
+            ? "var(--color-surface-container-high)"
+            : selectedSize
             ? "linear-gradient(135deg, var(--color-primary), var(--color-primary-container))"
             : "var(--color-surface-container-high)",
-          color: selectedSize ? "var(--color-on-primary)" : "var(--color-on-surface-variant)",
+          color: added
+            ? "var(--color-primary)"
+            : selectedSize
+            ? "var(--color-on-primary)"
+            : "var(--color-on-surface-variant)",
         }}
       >
-        {selectedSize ? "Dodaj do koszyka" : "Wybierz rozmiar"}
+        {added ? "Dodano do koszyka" : selectedSize ? "Dodaj do koszyka" : "Wybierz rozmiar"}
       </button>
     </div>
   );

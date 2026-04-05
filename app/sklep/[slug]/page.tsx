@@ -50,10 +50,12 @@ export default async function ProductPage({ params }: Props) {
           </p>
 
           <ProductDetail
+            productId={product.id}
             name={product.name}
             description={product.description}
             price={product.price}
             variants={variants}
+            image={image}
           />
         </div>
       </main>
