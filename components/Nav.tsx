@@ -26,9 +26,6 @@ export default function Nav() {
         <Link href="/sklep" className="text-xs tracking-widest uppercase text-on-surface-variant hover:text-on-surface transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
           Produkty
         </Link>
-        <Link href="/" className="text-xs tracking-widest uppercase text-on-surface-variant hover:text-on-surface transition-colors" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-          Info
-        </Link>
       </nav>
 
       <Link href="/koszyk" aria-label="Koszyk" className="relative">
