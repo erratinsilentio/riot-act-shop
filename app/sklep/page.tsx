@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+
+export const dynamic = "force-dynamic";
 import Nav from "@/components/Nav";
 import ProductCard from "@/components/ProductCard";
 import CategoryFilter from "./CategoryFilter";

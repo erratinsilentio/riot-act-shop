@@ -6,30 +6,26 @@ export async function getProducts(category?: string): Promise<Product[]> {
   if (category) query = query.eq("category", category);
   const { data, error } = await query;
   if (error) throw error;
-  return data ?? [];
+  return (data ?? []) as Product[];
 }
 
 export async function getProductBySlug(
   slug: string
 ): Promise<{ product: Product; variants: Variant[] } | null> {
-  const { data: product, error } = await supabase
+  const { data, error } = await supabase
     .from("products")
     .select("*")
     .eq("slug", slug)
     .single();
-  if (error || !product) return null;
+  if (error || !data) return null;
 
-  const { data: variants } = await supabase
+  const product = data as Product;
+
+  const { data: variantData } = await supabase
     .from("variants")
     .select("*")
     .eq("product_id", product.id)
     .order("size");
 
-  return { product, variants: variants ?? [] };
-}
-
-export async function getCategories(): Promise<string[]> {
-  const { data } = await supabase.from("products").select("category");
-  if (!data) return [];
-  return [...new Set(data.map((r) => r.category))].sort();
+  return { product, variants: (variantData ?? []) as Variant[] };
 }
