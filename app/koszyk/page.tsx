@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/components/Nav";
@@ -10,8 +11,26 @@ const SHIPPING = 1500; // 15.00 PLN in grosze
 
 export default function KoszykPage() {
   const { items, subtotal, removeItem, updateQuantity } = useCart();
+  const [loading, setLoading] = useState(false);
 
   const total = subtotal + (items.length > 0 ? SHIPPING : 0);
+
+  async function handleCheckout() {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items }),
+      });
+      const { url, error } = await res.json();
+      if (error || !url) throw new Error(error ?? "Błąd");
+      window.location.href = url;
+    } catch {
+      alert("Wystąpił błąd. Spróbuj ponownie.");
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-surface">
@@ -170,7 +189,9 @@ export default function KoszykPage() {
               </div>
 
               <button
-                className="w-full py-4 text-sm font-bold uppercase tracking-widest mb-4 transition-opacity hover:opacity-90"
+                onClick={handleCheckout}
+                disabled={loading}
+                className="w-full py-4 text-sm font-bold uppercase tracking-widest mb-4 transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
                 style={{
                   fontFamily: "var(--font-space-grotesk)",
                   letterSpacing: "0.1em",
@@ -178,7 +199,7 @@ export default function KoszykPage() {
                   color: "var(--color-on-primary)",
                 }}
               >
-                Przejdź do płatności
+                {loading ? "Przekierowywanie..." : "Przejdź do płatności"}
               </button>
 
               <Link
