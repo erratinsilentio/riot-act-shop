@@ -28,7 +28,7 @@ export default async function HomePage() {
         >
           <h2
             className="font-bold text-3xl md:text-5xl uppercase mb-6"
-            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em", textWrap: "balance" } as React.CSSProperties}
           >
             DOŁĄCZ DO <span style={{ color: "var(--color-primary)" }}>ARCHIWUM</span>
           </h2>

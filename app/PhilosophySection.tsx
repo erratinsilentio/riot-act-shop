@@ -25,7 +25,7 @@ export default function PhilosophySection({ image }: { image?: string }) {
 
         <h2
           className="font-black text-5xl md:text-7xl uppercase leading-tight mb-12"
-          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em" }}
+          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.02em", textWrap: "balance" } as React.CSSProperties}
         >
           {lines.map((line, i) => (
             <motion.span

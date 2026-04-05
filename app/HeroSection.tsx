@@ -2,18 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion, useReducedMotion } from "framer-motion";
 
 export default function HeroSection() {
+  const reduced = useReducedMotion();
   const { scrollY } = useScroll();
 
-  // Watermark drifts up slower than content
-  const watermarkY = useTransform(scrollY, [0, 600], [0, -120]);
-  // Background image scrolls even slower
-  const bgY = useTransform(scrollY, [0, 600], [0, -60]);
-  // Content fades and slides up on scroll
-  const contentOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const contentY = useTransform(scrollY, [0, 400], [0, -60]);
+  const watermarkY = useTransform(scrollY, [0, 600], reduced ? [0, 0] : [0, -120]);
+  const bgY = useTransform(scrollY, [0, 600], reduced ? [0, 0] : [0, -60]);
+  const contentOpacity = useTransform(scrollY, [0, 400], reduced ? [1, 1] : [1, 0]);
+  const contentY = useTransform(scrollY, [0, 400], reduced ? [0, 0] : [0, -60]);
 
   return (
     <section className="relative h-screen flex items-center px-6 md:px-12 pt-20 overflow-hidden">
@@ -36,6 +34,7 @@ export default function HeroSection() {
 
       {/* Watermark */}
       <motion.div
+        aria-hidden="true"
         className="absolute inset-0 flex items-center justify-center z-[5] pointer-events-none select-none opacity-[0.12] lg:opacity-[0.25]"
         style={{ mixBlendMode: "hard-light", y: watermarkY }}
       >
@@ -56,10 +55,10 @@ export default function HeroSection() {
       <motion.div className="relative z-10 max-w-5xl" style={{ opacity: contentOpacity, y: contentY }}>
         <motion.h1
           className="font-black text-[4rem] md:text-[10rem] leading-[0.85] uppercase text-on-surface"
-          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.03em" }}
-          initial={{ opacity: 0, y: 40 }}
+          style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "-0.03em", textWrap: "balance" } as React.CSSProperties}
+          initial={{ opacity: 0, y: reduced ? 0 : 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: reduced ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           RIOT
           <br />
@@ -69,18 +68,18 @@ export default function HeroSection() {
         <motion.p
           className="mt-8 text-sm md:text-base uppercase max-w-xl"
           style={{ fontFamily: "var(--font-space-grotesk)", letterSpacing: "0.2em", color: "var(--color-secondary)" }}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: reduced ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: reduced ? 0 : 0.8, delay: reduced ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           Worldwide Movement 1312
         </motion.p>
 
         <motion.div
           className="mt-12"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: reduced ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: reduced ? 0 : 0.8, delay: reduced ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <Link
             href="/sklep"
